@@ -2,21 +2,9 @@
 
 A standalone OpenClaw skill for creating **versioned, restorable backups** of OpenClaw state with checksum verification, dry-run restore plans, include/exclude filters, and automatic pre-restore rollback snapshots.
 
-## Why this exists
+> Built for people who want a safer way to back up and restore OpenClaw without manually copying a pile of runtime, memory, and workspace files.
 
-OpenClaw state lives across more than one place:
-
-- gateway/runtime config
-- session metadata
-- memory indexes and notes
-- workspace memory files
-- user-authored skills
-
-That makes ad-hoc copying fragile.
-
-This skill provides a repeatable backup and restore workflow with a machine-readable manifest, compatibility metadata, and a safety-first restore path.
-
-## Features
+## Highlights
 
 - **Versioned backup archives** (`.tar.gz`)
 - **Manifest + SHA-256 checksums** for every archived file
@@ -27,9 +15,30 @@ This skill provides a repeatable backup and restore workflow with a machine-read
 - **Automatic pre-restore rollback backup** before modifying current state
 - **Compatibility checks** for OpenClaw version mismatches
 
+## Why this exists
+
+OpenClaw state is spread across multiple places:
+
+- gateway/runtime config
+- session metadata
+- memory indexes and notes
+- workspace memory files
+- user-authored skills
+
+That makes ad-hoc copying fragile and partial restores risky.
+
+This skill provides a repeatable workflow with:
+
+- a machine-readable manifest
+- checksum verification
+- restore previews
+- rollback protection
+
 ## Repository contents
 
-- `SKILL.md` — skill instructions
+- `SKILL.md` — skill instructions for OpenClaw / ClawHub
+- `README.md` — human-facing project overview
+- `LICENSE` — MIT license
 - `scripts/backup_state.py` — create versioned backup archives
 - `scripts/restore_state.py` — verify, diff, and restore archives
 
@@ -151,6 +160,15 @@ Examples:
 
 This repository contains only the standalone `openclaw-state-backup` skill.
 It is intentionally separated from a larger private OpenClaw workspace so unrelated personal files, memories, and local runtime data are not published with it.
+
+## Roadmap
+
+Potential future improvements:
+
+- optional compression/encryption profiles
+- richer restore diff summaries
+- pluggable retention policies
+- export/import helpers for migration workflows
 
 ## License
 
